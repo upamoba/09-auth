@@ -1,4 +1,3 @@
-export default function ModalLayout() {
-
+export default function  ModalSlotDefault() {
   return null;
 }
