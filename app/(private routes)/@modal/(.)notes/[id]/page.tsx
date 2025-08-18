@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryClient, dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { fetchNoteById } from '@/lib/api';
-import NotePreviewClient from '../../../../components/NotePreview/NotePreview';
+import NotePreviewClient from '@/components/NotePreview/NotePreview';
 
 type ModalNotePageProps = {
   params: Promise<{ id: string }>;

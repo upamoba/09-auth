@@ -44,7 +44,6 @@ export async function clientFetchNotes(params: {
   search?: string;
   tag?: NoteTag | 'All';
 }): Promise<Note[]> {
- 
   const { data } = await apiClient.get<Note[]>('/notes', { params });
   return data;
 }

@@ -2,14 +2,14 @@
 import React, { FC, useState, useEffect } from 'react';
 import {keepPreviousData,useQuery } from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
-import type { FetchNotesResponse } from '../../../../lib/api'
-import { fetchNotes } from '../../../../lib/api';
-import SearchBox from '../../../../components/SearchBox/SearchBox';
-import Pagination from '../../../../components/Pagination/Pagination';
-import NoteList from '../../../../components/NoteList/NoteList';
-import { LoadingIndicator } from '../../../../components/LoadingIndicator/LoadingIndicator';
-import { ErrorMessage } from '../../../../components/ErrorMessage/ErrorMessage';
-import { EmptyState } from '../../../../components/EmptyState/EmptyState';
+import type { FetchNotesResponse } from '@/lib/api'
+import { fetchNotes } from '@/lib/api';
+import SearchBox from '@/components/SearchBox/SearchBox';
+import Pagination from '@/components/Pagination/Pagination';
+import NoteList from '@/components/NoteList/NoteList';
+import { LoadingIndicator } from '@/components/LoadingIndicator/LoadingIndicator';
+import { ErrorMessage } from '@/components/ErrorMessage/ErrorMessage';
+import { EmptyState } from '@/components/EmptyState/EmptyState';
 import styles from './NotesPage.module.css';
 import { FilterTag } from '@/types/note';
 import Link from 'next/link';

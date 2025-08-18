@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { clientGetMe, clientUpdateMe } from '@/lib/clientApi';
 import { useAuthStore } from '@/lib/store/authStore';
-import css from './ProfileEdit.module.css';
+import css from './EditProfilePage.module.css';
 
 export default function ProfileEditPage() {
   const router = useRouter();
