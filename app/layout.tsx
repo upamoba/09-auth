@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 
     },
   };
-  export default function RootLayout({children, modal}: { children: ReactNode; modal: ReactNode }) {
+  export default function RootLayout({children}: { children: ReactNode; }) {
     return (
       <html lang="uk">
         <body className={roboto.variable} suppressHydrationWarning>
@@ -37,7 +37,6 @@ export const metadata: Metadata = {
             <Header />
             {children}
             <Footer />
-            {modal}
           </TanStackProvider>
         </body>
       </html> 
