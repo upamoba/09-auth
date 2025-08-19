@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { clientRegister } from '@/lib/clientApi';
+import { clientRegister } from '@/lib/api/clientApi';
 import { useAuthStore } from '@/lib/store/authStore';
 import css from './SignUpPage.module.css';
 

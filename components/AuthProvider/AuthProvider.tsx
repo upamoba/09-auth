@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { clientLogout, clientSession } from '../../lib/clientApi';
+import { clientLogout, clientSession } from '../../lib/api/clientApi';
 import { useAuthStore } from '@/lib/store/authStore';
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {

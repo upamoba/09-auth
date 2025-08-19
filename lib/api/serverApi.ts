@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { apiClient } from '../app/api/api';
+import { apiClient } from '../../app/api/api';
 import type { User } from '@/types/user';
 import type { Note, NoteTag } from '@/types/note';
 

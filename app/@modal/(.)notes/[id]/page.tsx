@@ -1,6 +1,6 @@
 import React from 'react';
 import { QueryClient, dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { fetchNoteById } from '@/lib/api';
+import { fetchNoteById } from '@/lib/api/api';
 import NotePreviewClient from '@/components/NotePreview/NotePreview';
 
 type ModalNotePageProps = {
