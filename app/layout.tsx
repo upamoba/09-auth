@@ -5,6 +5,7 @@ import {  ReactNode } from 'react';
 import TanStackProvider from '../components/TanStackProvider/TanStackProvider';
 import { Roboto } from 'next/font/google';
 import { Metadata } from 'next/dist/lib/metadata/types/metadata-interface';
+import Modal from '@/components/Modal/Modal';
 
 const roboto = Roboto({
   subsets: ['latin','latin-ext'],
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 
     },
   };
-  export default function RootLayout({children}: { children: ReactNode; }) {
+  export default function RootLayout({children, modal}: { children: ReactNode; modal: ReactNode; }) {
     return (
       <html lang="uk">
         <body className={roboto.variable} suppressHydrationWarning>
@@ -37,6 +38,7 @@ export const metadata: Metadata = {
             <Header />
             {children}
             <Footer />
+            {modal}
           </TanStackProvider>
         </body>
       </html> 
