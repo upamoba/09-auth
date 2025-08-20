@@ -4,8 +4,8 @@ import Footer from '../components/Footer/Footer';
 import {  ReactNode } from 'react';
 import TanStackProvider from '../components/TanStackProvider/TanStackProvider';
 import { Roboto } from 'next/font/google';
-import { Metadata } from 'next/dist/lib/metadata/types/metadata-interface';
-import Modal from '@/components/Modal/Modal';
+import type { Metadata } from 'next';
+import AuthProvider from '@/components/AuthProvider/AuthProvider';
 
 const roboto = Roboto({
   subsets: ['latin','latin-ext'],
@@ -35,10 +35,12 @@ export const metadata: Metadata = {
       <html lang="uk">
         <body className={roboto.variable} suppressHydrationWarning>
           <TanStackProvider>
+            <AuthProvider>
             <Header />
             {children}
             <Footer />
             {modal}
+            </AuthProvider>
           </TanStackProvider>
         </body>
       </html> 

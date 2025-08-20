@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import css from './ProfilePage.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
+import { serverGetMe } from '@/lib/api/serverApi';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
@@ -16,7 +17,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const user = await serverGetMe();
+  const username = user?.username ?? '_';
+  const email = user?.email ?? '_';
+  const avatarSrc = (user?.avatar && user.avatar.trim() !== '') ? user.avatar : 'https://i.pravatar.cc/120?img=3';
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>
@@ -27,7 +32,7 @@ export default function ProfilePage() {
 
         <div className={css.avatarWrapper}>
           <Image
-         src="https://i.pravatar.cc/120?img=3"
+         src={avatarSrc}
             alt="User Avatar"
             width={120}
             height={120}
@@ -37,8 +42,8 @@ export default function ProfilePage() {
         </div>
 
         <div className={css.profileInfo}>
-          <p>Username: your_username</p>
-          <p>Email: your_email@example.com</p>
+          <p>Username:{username}</p>
+          <p>Email:{email}</p>
         </div>
       </div>
     </main>

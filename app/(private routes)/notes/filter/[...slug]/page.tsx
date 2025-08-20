@@ -1,4 +1,4 @@
-import { fetchNotes,} from '@/lib/api/api'
+import { serverFetchNotes} from '@/lib/api/serverApi'
 import type { FilterTag } from '@/types/note';
 import NotesClient from './Notes.client'
 import type { Metadata } from 'next';
@@ -30,7 +30,7 @@ openGraph:{
 export default async function FilteredNotesPage({ params }: PageProps) {
   const { slug } = await params;
   const filterTag: FilterTag = asFilterTag(slug?.[0]);
-  const initialData = await fetchNotes({
+  const initialData = await serverFetchNotes({
     page: 1,
     perPage: 12,
     tag: filterTag,

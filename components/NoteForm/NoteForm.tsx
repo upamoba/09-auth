@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { Note } from '@/types/note';
-import { createNote } from '@/lib/api/api';
+import { clientCreateNote} from '@/lib/api/clientApi';
 import {useNoteStore,initialDraft } from '@/lib/store/noteStore';
 import styles from './NoteForm.module.css';
 
@@ -15,7 +15,7 @@ const NoteForm: React.FC = () => {
   const { draft, setDraft, clearDraft } = useNoteStore();
   const [submitting, setSubmitting] = useState(false);
   const mut = useMutation<Note, Error, typeof initialDraft>({
-    mutationFn: (payload) => createNote(payload),
+    mutationFn: (payload) => clientCreateNote(payload),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['notes'], exact: false });
       clearDraft();

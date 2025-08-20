@@ -1,33 +1,37 @@
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
-const AUTH_ROUTES = ['/sign-in', '/sign-up'];
-const PRIVATE_PREFIXES = ['/notes', '/profile'];
-
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const access = req.cookies.get('accessToken')?.value;
-  const refresh = req.cookies.get('refreshToken')?.value;
-  const isAuthed = Boolean(access || refresh);
+  const isAuthRoute = pathname === '/sign-in' || pathname === '/sign-up';
+  const isPrivateRoute =
+    pathname.startsWith('/profile') || pathname.startsWith('/notes');
 
-  const isPrivate = PRIVATE_PREFIXES.some((p) => pathname.startsWith(p));
-  const isAuthPage = AUTH_ROUTES.includes(pathname);
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+  const refreshToken = cookieStore.get('refreshToken')?.value;
 
-  if (isPrivate && !isAuthed) {
-    const url = req.nextUrl.clone();
-    url.pathname = '/sign-in';
-    return NextResponse.redirect(url);
+  if (!accessToken && !!refreshToken) {
+    const refreshUrl = new URL('/api/auth/refresh', req.url);
+    refreshUrl.searchParams.set('next', pathname);
+
+    return NextResponse.redirect(refreshUrl);
   }
 
-  if (isAuthPage && isAuthed) {
-    const url = req.nextUrl.clone();
-    url.pathname = '/profile';
-    return NextResponse.redirect(url);
+
+  if (!accessToken && isPrivateRoute) {
+    const loginUrl = new URL('/sign-in', req.url);
+    loginUrl.searchParams.set('next', pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+  if (accessToken && isAuthRoute) {
+    const profileUrl = new URL('/profile', req.url);
+    return NextResponse.redirect(profileUrl);
   }
 
   return NextResponse.next();
 }
-
 export const config = {
-  matcher: ['/((?!_next|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)).*)'],
+  matcher: ['/profile/:path*', '/notes/:path*', '/sign-in', '/sign-up'],
 };

@@ -1,6 +1,13 @@
-import { apiClient } from '../../app/api/api';
+import { apiClient } from '@/lib/api/api';
 import type { User } from '@/types/user';
 import type { Note, NoteTag } from '@/types/note';
+
+export type FetchNotesResponse = {
+  data: Note[];
+  totalPages: number;
+  page: number;
+  perPage: number;
+};
 
 // ---- Auth ----
 export async function clientRegister(payload: { email: string; password: string }): Promise<User> {
@@ -43,8 +50,8 @@ export async function clientFetchNotes(params: {
   perPage?: number;
   search?: string;
   tag?: NoteTag | 'All';
-}): Promise<Note[]> {
-  const { data } = await apiClient.get<Note[]>('/notes', { params });
+}): Promise<FetchNotesResponse> {
+  const { data } = await apiClient.get<FetchNotesResponse>('/notes', { params });
   return data;
 }
 
@@ -62,3 +69,6 @@ export async function clientDeleteNote(id: string): Promise<Note> {
   const { data } = await apiClient.delete<Note>(`/notes/${id}`);
   return data;
 }
+
+
+
