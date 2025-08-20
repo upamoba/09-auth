@@ -1,15 +1,18 @@
-import type { ReactNode } from 'react';
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 type PrivateLayoutProps = {
-  children: ReactNode;
-  modal: ReactNode;
+  children: React.ReactNode;
 };
 
-export default function PrivateLayout({ children, modal }: PrivateLayoutProps) {
-  return (
-    <>
-      {children}
-      {modal}
-    </>
-  );
+export default function PrivateLayout({ children }: PrivateLayoutProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.refresh();
+  }, [router]);
+
+  return <>{children}</>;
 }

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchNoteById } from '../../lib/api/api';
+import { clientFetchNoteById } from '../../lib/api/clientApi';
 import type { Note } from '../../types/note';
 import styles from './NotePreview.module.css';
 
@@ -10,7 +10,7 @@ interface Props { noteId: string; }
 export default function NotePreview({ noteId }: Props) {
   const { data, isLoading, isError } = useQuery<Note, Error>({
     queryKey: ['note', noteId],
-    queryFn: () => fetchNoteById(noteId),
+    queryFn: () => clientFetchNoteById(noteId),
     refetchOnMount: false
   });
 
