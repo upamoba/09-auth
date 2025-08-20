@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { clientFetchNoteById } from '@/lib/api/clientApi';
+import { serverFetchNoteById } from '@/lib/api/serverApi';
 import NoteDetailsClient from './NoteDetails.client';
 
 
@@ -10,7 +10,7 @@ export async function generateMetadata({ params}:{params:Promise< {id: string}>
  }): Promise<Metadata> {
   const {id} = await params;
   try {
-    const note = await clientFetchNoteById(id);
+    const note = await serverFetchNoteById(id);
     const title = `${note.title} | NoteHub`;
     const description  =(note.content || '').trim().slice(0, 140) || 'Note details.';
   
