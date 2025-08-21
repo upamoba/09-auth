@@ -15,7 +15,6 @@ const roboto = Roboto({
 });
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://notehub-yourname.vercel.app';
-
 export const metadata: Metadata = {
   title: 'NoteHub simple notes manager',
   description: 'NoteHub is a simple and efficient application for writing,browsing and organizing your personal notes.', 

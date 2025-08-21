@@ -20,7 +20,7 @@ export default function TagsMenu() {
         <ul className={styles.menuList}>
           <li className={styles.menuItem}>
             <Link
-              href="/notes/filter"
+              href="/notes/filter/All"
               className={styles.menuLink}
               onClick={() => setOpen(false)}
             >

@@ -5,12 +5,13 @@ import type { Note, NoteTag } from '@/types/note';
 import type { AxiosResponse } from 'axios';
 import type { FetchNotesResponse } from './clientApi';
 
+
 async function cookieHeader(): Promise<string> {
   const store = await cookies();
   return store.getAll().map((ck) => `${ck.name}=${ck.value}`).join('; ');
 }
 
-export async function serverSession(): Promise<AxiosResponse<{ success: boolean }>> {
+export async function serverCheckSession(): Promise<AxiosResponse<{ success: boolean }>> {
  const res = await apiClient.get<{ success: boolean }>('/auth/session', {
     headers: { cookie: await cookieHeader() },
     validateStatus: () => true, 

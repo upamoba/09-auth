@@ -39,7 +39,7 @@ const NotesClient: FC<NotesClientProps> = ({ initialData , filterTag }) => {
     initialData: page === 1  ? initialData : undefined,
     placeholderData: keepPreviousData
   })
-const notes = data?.data ?? []
+  const notes = data?.notes ?? []
   const totalPages = data?.totalPages ?? 1
 
   return (
